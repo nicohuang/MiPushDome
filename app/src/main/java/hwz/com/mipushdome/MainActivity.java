@@ -7,33 +7,26 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.xiaomi.mipush.sdk.MiPushClient;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * 1、本demo可以直接运行，设置topic和alias。
+ * 设置topic和alias。(标签，别名)
  * 服务器端使用appsecret即可以向demo发送广播和单点的消息。
- *  2、为了修改本demo为使用你自己的appid，你需要修改几个地方：DemoApplication.java中的APP_ID,
- * APP_KEY，AndroidManifest.xml中的packagename，和权限permission.MIPUSH_RECEIVE的前缀为你的packagename。
+ *  2、为了修改本demo为使用你自己的appid，你需要修改几个地方：
+ *  DemoApplication.java中的APP_ID,APP_KEY，
+ *  AndroidManifest.xml中的packagename，和权限permission.MIPUSH_RECEIVE的前缀为你的packagename。
  * 
- * @author wangkuiwei
+ * @author nico
  */
 public class MainActivity extends Activity {
 
-    public static List<String> logList = new ArrayList<String>();
-
     public static MainActivity sMainActivity = null;
-    public TextView logView = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         sMainActivity = this;
-        logView = (TextView)findViewById(R.id.log);
         // 设置别名
         findViewById(R.id.set_alias).setOnClickListener(new OnClickListener() {
 
@@ -198,17 +191,4 @@ public class MainActivity extends Activity {
         });
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        refreshLogInfo();
-    }
-
-    public void refreshLogInfo() {
-        String AllLog ="";
-        for(String log : logList) {
-            AllLog = AllLog + log + "\n\n";
-        }
-        logView.setText(AllLog);
-    }
 }

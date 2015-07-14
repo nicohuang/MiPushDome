@@ -5,10 +5,7 @@ import android.app.ActivityManager.RunningAppProcessInfo;
 import android.app.Application;
 import android.content.Context;
 import android.os.Process;
-import android.util.Log;
 
-import com.xiaomi.channel.commonutils.logger.LoggerInterface;
-import com.xiaomi.mipush.sdk.Logger;
 import com.xiaomi.mipush.sdk.MiPushClient;
 
 import java.util.List;
@@ -28,10 +25,6 @@ public class DemoApplication extends Application {
     // 申请的APPKEY
     public static final String APP_KEY = "5191735998244";
 
-    // 此TAG在adb logcat中检索自己所需要的信息， 只需在命令行终端输入 adb logcat | grep
-    // hwz.com.mipushdome
-    public static final String TAG = "hwz.com.mipushdome";
-
     private static DemoMessageReceiver.DemoHandler handler = null;
 
 
@@ -46,25 +39,6 @@ public class DemoApplication extends Application {
         if (shouldInit()) {
             MiPushClient.registerPush(this, APP_ID, APP_KEY);
         }
-
-        LoggerInterface newLogger = new LoggerInterface() {
-
-            @Override
-            public void setTag(String tag) {
-                // ignore
-            }
-
-            @Override
-            public void log(String content, Throwable t) {
-                Log.d(TAG, content, t);
-            }
-
-            @Override
-            public void log(String content) {
-                Log.d(TAG, content);
-            }
-        };
-        Logger.setLogger(this, newLogger);
         if (handler == null)
             handler = new DemoMessageReceiver.DemoHandler(getApplicationContext());
     }
