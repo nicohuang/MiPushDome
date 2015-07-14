@@ -23,14 +23,14 @@ import java.util.List;
  */
 public class DemoApplication extends Application {
 
-    // user your appid the key.
+    // 申请的APPID
     public static final String APP_ID = "2882303761517359244";
-    // user your appid the key.
+    // 申请的APPKEY
     public static final String APP_KEY = "5191735998244";
 
     // 此TAG在adb logcat中检索自己所需要的信息， 只需在命令行终端输入 adb logcat | grep
-    // com.xiaomi.mipushdemo
-    public static final String TAG = "com.xiaomi.mipushdemo";
+    // hwz.com.mipushdome
+    public static final String TAG = "hwz.com.mipushdome";
 
     private static DemoMessageReceiver.DemoHandler handler = null;
 

@@ -9,11 +9,15 @@ import android.widget.TimePicker;
 import android.widget.TimePicker.OnTimeChangedListener;
 
 public class TimeIntervalDialog extends Dialog implements OnTimeChangedListener{
-
+    //设置时间开启或取消的接口
     private TimeIntervalInterface timeIntervalInterface;
+    //上下文
     private Context mContext;
+    //开始时间  /  结束时间
     private TimePicker startTimePicker, endTimePicker;
+    //确定按钮  /  取消按钮
     private Button applyBtn, cancelBtn;
+    //开始的 时:分    /    结束的 时:分
     private int startHour, startMinute, endHour, endMinute;
 
     public TimeIntervalDialog(Context context, TimeIntervalInterface timeIntervalInterface, int startHour, int startMinute, int endHour, int endMinute) {
@@ -36,23 +40,29 @@ public class TimeIntervalDialog extends Dialog implements OnTimeChangedListener{
         setContentView(R.layout.set_time_dialog);
         setCancelable(true);
         setTitle(mContext.getString(R.string.set_accept_time));
+        //设置开始时间
         startTimePicker = (TimePicker) findViewById(R.id.startTimePicker);
         startTimePicker.setIs24HourView(true);
         startTimePicker.setCurrentHour(startHour);
         startTimePicker.setCurrentMinute(startMinute);
         startTimePicker.setOnTimeChangedListener(this);
+        //设置结束时间
         endTimePicker = (TimePicker) findViewById(R.id.endTimePicker);
         endTimePicker.setIs24HourView(true);
         endTimePicker.setCurrentHour(endHour);
         endTimePicker.setCurrentMinute(endMinute);
         endTimePicker.setOnTimeChangedListener(this);
+        //确定
         applyBtn = (Button) findViewById(R.id.apply);
         applyBtn.setOnClickListener(clickListener);
+        //取消
         cancelBtn = (Button) findViewById(R.id.cancel);
         cancelBtn.setOnClickListener(clickListener);
     }
 
-
+    /**
+     * 实现确定/取消按钮的监听
+     */
     private Button.OnClickListener clickListener=new Button.OnClickListener(){
 
         @Override
@@ -71,7 +81,12 @@ public class TimeIntervalDialog extends Dialog implements OnTimeChangedListener{
             }
         }
     };
-
+    /**
+     * 设置时间改变的方法
+     * @param view  开始或结束时间
+     * @param hourOfDay
+     * @param minute
+     */
     @Override
     public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
         if(view == startTimePicker) {
@@ -82,7 +97,9 @@ public class TimeIntervalDialog extends Dialog implements OnTimeChangedListener{
             endMinute = minute;
         }
     }
-
+    /**
+     * 设置或取消接受通知的接口
+     */
     static interface TimeIntervalInterface {
         public void apply(int startHour, int startMin, int endHour, int endMin);
         public void cancel();
