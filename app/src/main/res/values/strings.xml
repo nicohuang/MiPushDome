@@ -20,9 +20,9 @@
     <string name="sandbox_env">沙箱环境</string>
     <string name="register_success">注册成功</string>
     <string name="register_fail">注册失败</string>
-    <string name="recv_passthrough_message"> Receive a passthrough message. Content is \"%1$s\"</string>
-    <string name="click_notification_message"> Clicked a notification message. Content is \"%1$s\"</string>
-    <string name="arrive_notification_message"> Arrived a notification message. Content is \"%1$s\"</string>
+    <string name="recv_passthrough_message">你收到透传消息</string>
+    <string name="click_notification_message">你点击了通知</string>
+    <string name="arrive_notification_message">你收到通知</string>
     <string name="set_alias_success">设置别名成功</string>
     <string name="set_alias_fail">设置别名失败</string>
     <string name="unset_alias_success">撤销别名成功</string>

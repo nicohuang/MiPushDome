@@ -20,7 +20,8 @@ import java.util.List;
 
 public class DemoMessageReceiver extends PushMessageReceiver
 {
-    private static String log="";
+    private static String log = "";
+
     /**
      * 接收服务器向客户端发送的透传消息
      *
@@ -30,12 +31,9 @@ public class DemoMessageReceiver extends PushMessageReceiver
     @Override
     public void onReceivePassThroughMessage(Context context, MiPushMessage message)
     {
-        String log = context.getString(R.string.recv_passthrough_message, message.getContent());
+        String log = context.getString(R.string.recv_passthrough_message);
         Message msg = Message.obtain();
-        if (message.isNotified())
-        {
-            msg.obj = log;
-        }
+        msg.obj = log;
         DemoApplication.getHandler().sendMessage(msg);
     }
 
@@ -48,7 +46,7 @@ public class DemoMessageReceiver extends PushMessageReceiver
     @Override
     public void onNotificationMessageClicked(Context context, MiPushMessage message)
     {
-        String log = context.getString(R.string.click_notification_message, message.getContent());
+        String log = context.getString(R.string.click_notification_message);
         Message msg = Message.obtain();
         if (message.isNotified())
         {
@@ -67,12 +65,9 @@ public class DemoMessageReceiver extends PushMessageReceiver
     @Override
     public void onNotificationMessageArrived(Context context, MiPushMessage message)
     {
-        String log = context.getString(R.string.arrive_notification_message, message.getContent());
+        String log = context.getString(R.string.arrive_notification_message);
         Message msg = Message.obtain();
-        if (message.isNotified())
-        {
-            msg.obj = log;
-        }
+        msg.obj = log;
         DemoApplication.getHandler().sendMessage(msg);
     }
 
@@ -95,8 +90,7 @@ public class DemoMessageReceiver extends PushMessageReceiver
             if (message.getResultCode() == ErrorCode.SUCCESS)
             {
                 log = context.getString(R.string.register_success);
-            }
-            else
+            } else
             {
                 log = context.getString(R.string.register_fail);
             }
@@ -107,8 +101,7 @@ public class DemoMessageReceiver extends PushMessageReceiver
             if (message.getResultCode() == ErrorCode.SUCCESS)
             {
                 log = context.getString(R.string.set_alias_success, cmdArg1);
-            }
-            else
+            } else
             {
                 log = context.getString(R.string.set_alias_fail, message.getReason());
             }
@@ -119,8 +112,7 @@ public class DemoMessageReceiver extends PushMessageReceiver
             if (message.getResultCode() == ErrorCode.SUCCESS)
             {
                 log = context.getString(R.string.unset_alias_success, cmdArg1);
-            }
-            else
+            } else
             {
                 log = context.getString(R.string.unset_alias_fail, message.getReason());
             }
@@ -142,8 +134,7 @@ public class DemoMessageReceiver extends PushMessageReceiver
             if (message.getResultCode() == ErrorCode.SUCCESS)
             {
                 log = context.getString(R.string.unset_account_success, cmdArg1);
-            }
-            else
+            } else
             {
                 log = context.getString(R.string.unset_account_fail, message.getReason());
             }
@@ -154,8 +145,7 @@ public class DemoMessageReceiver extends PushMessageReceiver
             if (message.getResultCode() == ErrorCode.SUCCESS)
             {
                 log = context.getString(R.string.subscribe_topic_success, cmdArg1);
-            }
-            else
+            } else
             {
                 log = context.getString(R.string.subscribe_topic_fail, message.getReason());
             }
@@ -177,8 +167,7 @@ public class DemoMessageReceiver extends PushMessageReceiver
             if (message.getResultCode() == ErrorCode.SUCCESS)
             {
                 log = context.getString(R.string.set_accept_time_success, cmdArg1, cmdArg2);
-            }
-            else
+            } else
             {
                 log = context.getString(R.string.set_accept_time_fail, message.getReason());
             }
@@ -245,14 +234,10 @@ public class DemoMessageReceiver extends PushMessageReceiver
         @Override
         public void handleMessage(Message msg)
         {
-            String s = (String) msg.obj;
-            if (MainActivity.sMainActivity != null)
+            String message = (String) msg.obj;
+            if (!TextUtils.isEmpty(message))
             {
-                Toast.makeText(context,log, Toast.LENGTH_SHORT).show();
-            }
-            if (!TextUtils.isEmpty(s))
-            {
-                Toast.makeText(context, s, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
         }
     }
