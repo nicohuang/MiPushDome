@@ -212,12 +212,6 @@ public class DemoMessageReceiver extends PushMessageReceiver
         DemoApplication.getHandler().sendMessage(msg);
     }
 
-//    @SuppressLint("SimpleDateFormat")
-//    public static String getSimpleDate()
-//    {
-//        return new SimpleDateFormat("MM-dd hh:mm:ss").format(new Date());
-//    }
-
     /**
      * 接收message进行操作
      */
