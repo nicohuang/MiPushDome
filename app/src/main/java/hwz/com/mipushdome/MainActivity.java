@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.xiaomi.mipush.sdk.MiPushClient;
@@ -22,10 +23,15 @@ import com.xiaomi.mipush.sdk.MiPushClient;
 public class MainActivity extends Activity {
 
     public static MainActivity sMainActivity = null;
+    //标识推送是否开启1：开启  0：暂停
+    private static int flag = 1;
+
+    private Button btnPush;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        btnPush = (Button)findViewById(R.id.pause_push);
         sMainActivity = this;
         // 设置别名
         findViewById(R.id.set_alias).setOnClickListener(new OnClickListener() {
@@ -182,11 +188,24 @@ public class MainActivity extends Activity {
             }
         });
         // 暂停推送
-        findViewById(R.id.pause_push).setOnClickListener(new OnClickListener() {
+        btnPush.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                MiPushClient.pausePush(MainActivity.this, null);
+                switch (flag)
+                {
+                    case 0:
+                        MiPushClient.resumePush(MainActivity.this,null);
+                        btnPush.setText("暂停推送");
+                        flag = 1;//标识开始推送
+                        break;
+                    case 1:
+                        MiPushClient.pausePush(MainActivity.this, null);
+                        btnPush.setText("开启推送");
+                        flag = 0;//标识暂停推送
+                        break;
+                }
+
             }
         });
     }
